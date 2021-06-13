@@ -1,0 +1,6 @@
+.stack-work/
+*~
+stack.yaml.lock
+.pre-commit-config.yaml
+result*
+*.sqlite3*

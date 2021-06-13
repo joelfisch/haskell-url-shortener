@@ -1,0 +1,112 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 3fe40b5459d057191a335aff42067473124ee30525d6c9e3d6f6db064d7c3252
+
+name:           haskell-url-shortener
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/joelfisch/haskell-url-shortener#readme>
+homepage:       https://github.com/joelfisch/haskell-url-shortener#readme
+bug-reports:    https://github.com/joelfisch/haskell-url-shortener/issues
+author:         Joel Fisch
+maintainer:     Joel Fisch
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/joelfisch/haskell-url-shortener
+
+library
+  exposed-modules:
+      Shortener
+      Shortener.Data
+      Shortener.DB
+      Shortener.Entity
+      Shortener.Handler.GetLink
+      Shortener.Handler.PostLink
+  other-modules:
+      Paths_haskell_url_shortener
+  hs-source-dirs:
+      src
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , monad-logger
+    , persistent
+    , persistent-sqlite
+    , persistent-template
+    , raw-strings-qq
+    , regex-tdfa
+    , servant-server
+    , text
+    , validity
+    , validity-text
+    , wai
+    , warp
+  default-language: Haskell2010
+
+executable haskell-url-shortener-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_haskell_url_shortener
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base
+    , haskell-url-shortener
+    , monad-logger
+    , persistent
+    , persistent-sqlite
+    , persistent-template
+    , raw-strings-qq
+    , regex-tdfa
+    , servant-server
+    , text
+    , validity
+    , validity-text
+    , wai
+    , warp
+  default-language: Haskell2010
+
+test-suite haskell-url-shortener-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_haskell_url_shortener
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , aeson
+    , base
+    , bytestring
+    , genvalidity-hspec
+    , haskell-url-shortener
+    , hspec
+    , hspec-wai
+    , hspec-wai-json
+    , http-types
+    , monad-logger
+    , persistent
+    , persistent-sqlite
+    , persistent-template
+    , raw-strings-qq
+    , regex-tdfa
+    , servant-server
+    , text
+    , validity
+    , validity-text
+    , wai
+    , wai-extra
+    , warp
+  default-language: Haskell2010
