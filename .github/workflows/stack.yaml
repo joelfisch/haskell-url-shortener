@@ -44,9 +44,9 @@ jobs:
 
     - name: Build
       run: |
+        pwd
         stack install --system-ghc --local-bin-path="."
-        mv haskell-url-shortener-exe url-shortener
-        docker build -t docker.pkg.github.com/${{ github.repository }}/haskell-url-shortener:${{ github.sha }} .
+        ls -l
 
     - name: Log in to GitHub Docker Registry
       if: github.event.ref == 'refs/heads/master'
