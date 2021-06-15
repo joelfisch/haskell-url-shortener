@@ -45,7 +45,12 @@ jobs:
     - name: Build
       run: |
         stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
-        cp $(stack path --local-install-root)/bin/haskell-url-shortener-exe ./url-shortener
+        echo "----------------"
+        stack path --local-install-root
+        ls -l $(stack path --local-install-root)
+        echo "----------------"
+        ls -l $(stack path --local-install-root)/bin
+        echo "----------------"
 
     - name: Log in to GitHub Docker Registry
       if: github.event.ref == 'refs/heads/master'
