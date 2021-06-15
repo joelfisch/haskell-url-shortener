@@ -45,17 +45,7 @@ jobs:
     - name: Build
       run: |
         stack install --system-ghc --local-bin-path="."
-        echo "----------------"
-        ls -l
-        echo "----------------"
-        stack path --local-install-root
-        ls -l $(stack path --local-install-root)
-        echo "----------------"
-        stack path --local-bin-path
-        ls -l $(stack path --local-bin-path)
-        echo "----------------"
         mv haskell-url-shortener-exe url-shortener
-        echo "----------------"
 
     - name: Log in to GitHub Docker Registry
       if: github.event.ref == 'refs/heads/master'
