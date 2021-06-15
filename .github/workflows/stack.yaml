@@ -44,9 +44,7 @@ jobs:
 
     - name: Build
       run: |
-        pwd
         stack install --system-ghc --local-bin-path="."
-        ls -l
 
     - name: Log in to GitHub Docker Registry
       if: github.event.ref == 'refs/heads/master'
