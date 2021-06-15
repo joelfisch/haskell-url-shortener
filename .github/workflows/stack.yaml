@@ -9,7 +9,7 @@ on:
 jobs:
   stack:
     name: stack / ghc ${{ matrix.ghc }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
@@ -38,10 +38,28 @@ jobs:
       run: |
         stack build --system-ghc --only-dependencies
 
-    - name: Build
-      run: |
-        stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
-
     - name: Test
       run: |
         stack test --system-ghc
+
+    - name: Build
+      run: |
+        stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
+        cp $(stack path --local-install-root)/bin/haskell-url-shortener-exe ./url-shortener
+
+    - name: Log in to GitHub Docker Registry
+      if: github.event.ref == 'refs/heads/master'
+      uses: docker/login-action@v1
+      with:
+        registry: docker.pkg.github.com
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build container image
+      if: github.event.ref == 'refs/heads/master'
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: |
+          docker.pkg.github.com/${{ github.repository }}/haskell-url-shortener:${{ github.sha }}
+          docker.pkg.github.com/${{ github.repository }}/haskell-url-shortener:latest
