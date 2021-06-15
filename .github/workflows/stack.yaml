@@ -44,12 +44,17 @@ jobs:
 
     - name: Build
       run: |
-        stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
+        stack install --system-ghc --local-bin-path="."
+        echo "----------------"
+        ls -l
         echo "----------------"
         stack path --local-install-root
         ls -l $(stack path --local-install-root)
         echo "----------------"
-        ls -l $(stack path --local-install-root)/bin
+        stack path --local-bin-path
+        ls -l $(stack path --local-bin-path)
+        echo "----------------"
+        mv haskell-url-shortener-exe url-shortener
         echo "----------------"
 
     - name: Log in to GitHub Docker Registry
