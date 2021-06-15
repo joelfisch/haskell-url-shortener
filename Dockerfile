@@ -1,3 +1,4 @@
 FROM ubuntu:20.04
-COPY url-shortener /url-shortener
+EXPOSE 8080
+COPY ./haskell-url-shortener-exe /url-shortener
 CMD ["/url-shortener"]
